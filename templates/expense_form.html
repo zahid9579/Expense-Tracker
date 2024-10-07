@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Expense Tracker Application{% endblock %}
+
+{% block content %}
+<h1 class="h-exp">Your Path to Smarter Spending</h1>
+
+<h2>
+    {% if form.instance.pk %} Edit Expense {% else %} Create Expense {% endif %}
+</h2>
+<form method="POST" enctype="multipart/form-data" class="form">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="s-btn" type="submit">Submit</button>
+</form>
+<a class="b-exp"href="{% url 'expense_list' %}">Back to expense list</a>
+{% endblock %}

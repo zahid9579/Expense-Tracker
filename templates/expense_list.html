@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% load static %} {% block title %}Expense Tracker
+Application{% endblock %} {% block content %}
+<h1 class="h-exp">Your Path to Smarter Spending</h1>
+<a class="e-btn" href="{% url 'expense_create' %}">Create an expense</a>
+
+<ul class="expense-list">
+  {% for expense in expenses %}
+  <li>
+    <div>
+      <span class="expense-label">User:</span>
+      <span>{{ expense.user.username }}</span>
+    </div>
+    <div>
+      <span class="expense-label">Date:</span> <span>{{ expense.date }}</span>
+    </div>
+    <div>
+      <span class="expense-label">Category:</span>
+      <span>{{ expense.category }}</span>
+    </div>
+    <div>
+      <span class="expense-label">Description:</span>
+      <span>{{ expense.description }}</span>
+    </div>
+    <div>
+      <span class="expense-label">Amount:</span>
+      <span>${{ expense.amount }}</span>
+    </div>
+    <!--This is for delete and edit button-->
+    <a class="d-btn" href="{% url 'expense_delete' expense.id %}"> Delete </a>
+
+    <a class="c-btn" href="{% url 'expense_edit' expense.id %}"> Edit </a>
+  </li>
+
+  {% empty %}
+  <p class="no-expenses">No expenses found.</p>
+  {% endfor %}
+</ul>
+{% endblock %}

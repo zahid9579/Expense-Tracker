@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Confirm Delete
+{% endblock %}
+
+{% block content %}
+  <h1 class="d-heading">
+    Are you sure that you want to delete the expense?
+  </h1>
+  <form method="post">
+    {% csrf_token %}
+    <button class="d-btn">Delete</button>
+    <a class="c-btn" href="{% url 'expense_list' %}">Cancel</a>
+  </form>
+{% endblock %}

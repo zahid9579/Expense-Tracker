@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Expense Tracker Application{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header class="h-container">
+        <h1>Expense Tracker</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'expense_list' %}">Home</a></li>
+                <li><a href="{% url 'expense_list' %}">Expenses</a></li>
+                {% if user.is_authenticated %}
+                <li>
+                    <form class="fform" method="post" action="{% url 'logout' %}" style="display:inline;">
+                        {% csrf_token %}
+                        <!-- Style the logout button like a normal text link -->
+                        <button type="submit" style="background:none; border:none; padding:0; font: inherit; color:inherit; cursor:pointer; text-decoration: underline;">Logout</button>
+                    </form>
+                </li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    
+    {% block content %}{% endblock %}
+</body>
+</html>
